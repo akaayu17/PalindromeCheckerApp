@@ -9,7 +9,18 @@ public class PalindromeCheckerApp {
      */
 
     public static void main(String[] args){
-        System.out.println(" Welcome to the Palindrome Checker Management System \n Version : 1.0 \n System initialized successfully. ");
+    String str = new String ("madama");
+    boolean isPalindrome=true;
+    for (int i=0; i<str.length()/2;i++){
+        if(str.charAt(i)!=str.charAt(str.length()-i-1)){
+            System.out.println("The string "+ str +" is not palindrome.");
+
+            return;
+
+        }
+    }
+        System.out.println("The string " + str +
+                 isPalindrome);
 
     }
 }
