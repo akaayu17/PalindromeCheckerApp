@@ -3,24 +3,24 @@ public class PalindromeCheckerApp {
     /**
      * Application entry point.
      *
-     * This is a Palindrome Checker App created from Java
+     * This is a Palindrome Checker using String reverse
      * @author Aayusha Kuikel
      * @Version 1.0
      */
 
     public static void main(String[] args){
-    String str = new String ("madama");
-    boolean isPalindrome=true;
-    for (int i=0; i<str.length()/2;i++){
-        if(str.charAt(i)!=str.charAt(str.length()-i-1)){
-            System.out.println("The string "+ str +" is not palindrome.");
-
-            return;
-
-        }
+    String str = new String ("aayusha");
+    String reversed="";
+    for(int i=str.length()-1; i>=0;i--) {
+        reversed = reversed + str.charAt(i);
     }
-        System.out.println("The string " + str +
-                 isPalindrome);
+    if(str.equals(reversed)){
+        System.out.println("The string is palindrome.");
+        return;
+    }
+        System.out.println("The string is not palindrome.");
 
     }
-}
+
+    }
+
