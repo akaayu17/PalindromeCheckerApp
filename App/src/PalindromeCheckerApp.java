@@ -1,68 +1,106 @@
+/** MAIN CLASS - UseCase12PalindromeCheckerApp
+
+ Use Case 12: Strategy Pattern for Palindrome Algorithms
+
+ Description:
+ This class demonstrates how different palindrome
+ validation algorithms can be selected dynamically
+ at runtime using the Strategy Design Pattern.
+
+ At this stage, the application:
+
+ Defines a common PalindromeStrategy interface
+
+ Implements a concrete Stack based strategy
+
+ Injects the strategy at runtime
+
+ Executes the selected algorithm
+
+ No performance comparison is done in this use case.
+ The focus is purely on algorithm interchangeability.
 
 
-/**
-Use Case 11: Object-Oriented Palindrome Service
-
-Description:
-This class demonstrates palindrome validation using
-        object-oriented design.
-
-The palindrome logic is encapsulated inside a
-PalindromeService class.
-
-This improves:
-
-Reusability
- Readability
- Separation of concerns
-
-@author Aayusha Kuikel
-@version 11.0
-*/
+ @author Aayusha Kuikel
+ @version 12.0
+ */
 
 
 import java.util.Stack;
-import java.util.Scanner;
 
-public class PalindromeCheckerApp {
+interface PalindromeStrategy {
+    boolean check(String str);
+}
 
-    public boolean checkPalindrome(String input) {
 
-        if (input == null) {
-            return false;
-        }
+class LoopStrategy implements PalindromeStrategy {
+    @Override
+    public boolean check(String str) {
+        str = str.trim().toLowerCase();
 
-        String cleaned = input.replaceAll("\\s+", "").toLowerCase();
-
-        Stack<Character> stack = new Stack<>();
-
-        for (int i = 0; i < cleaned.length(); i++) {
-            stack.push(cleaned.charAt(i));
-        }
-
-        for (int i = 0; i < cleaned.length(); i++) {
-            if (cleaned.charAt(i) != stack.pop()) {
+        for (int i = 0; i < str.length() / 2; i++) {
+            if (str.charAt(i) != str.charAt(str.length() - i - 1)) {
                 return false;
             }
         }
-
         return true;
     }
+}
 
-    // ⭐ Main method (program starts here)
-    public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
+class StackStrategy implements PalindromeStrategy {
+    @Override
+    public boolean check(String str) {
+        str = str.trim().toLowerCase();
 
-        System.out.print("input: ");
-        String input = sc.nextLine();
+        Stack<Character> stack = new Stack<>();
 
-        PalindromeCheckerApp obj = new PalindromeCheckerApp();
+        for (char c : str.toCharArray()) {
+            stack.push(c);
+        }
 
-        boolean result = obj.checkPalindrome(input);
-
-        System.out.println("is Palindrome? :" + result);
-
-        sc.close();
+        for (char c : str.toCharArray()) {
+            if (c != stack.pop()) {
+                return false;
+            }
+        }
+        return true;
     }
+}
+
+
+class PalindromeContext {
+    private PalindromeStrategy strategy;
+
+    public PalindromeContext(PalindromeStrategy strategy) {
+        this.strategy = strategy;
+    }
+
+    public void setStrategy(PalindromeStrategy strategy) {
+        this.strategy = strategy;
+    }
+
+    public boolean checkPalindrome(String str) {
+        return strategy.check(str);
+    }
+}
+
+public class PalindromeCheckerApp {
+    public static void main(String[] args) {
+        String input = "madam";
+
+
+        PalindromeStrategy strategy = new LoopStrategy();
+        // PalindromeStrategy strategy = new StackStrategy();
+
+        PalindromeContext context = new PalindromeContext(strategy);
+
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome: " + context.checkPalindrome(input));
+    }
+
+
+
+
+
 }
