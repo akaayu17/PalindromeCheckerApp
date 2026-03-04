@@ -1,48 +1,47 @@
 
 
+
 import java.util.*;
 
 /**
  * main class - use case palindrome app
  *
- * use case 8: Linked list  Based Palindrome checker
+ * use case 10:Normalized Palindrome Validation
  *
  * Description:
- * this class validates the palindrome using Linked list
+ * this class validates the palindrome after processing the input string
  *
  *  the application:
- *  pushes characters to linked list
- *  checks the first and last element of the list and continue
- *  displays the result
+ *  get the input string and convert it into lowercase
+ *  remove the spaces and other characters from input string and form a normalized string
+ *  check for palindrome and display the result
  *
  *
  * @author  Aayusha Kuikel
- * @version 8.0
+ * @version 10.0
  */
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
-        String input = "level";
-        LinkedList<Character> list=new LinkedList<>();
+        String input = "A man a plan a canal panama";
+        boolean isPalindrome=true;
+        input=input.toLowerCase();
+        String normalizedString ="";
+        for(char c:input.toCharArray()){
+            if(Character.isLetterOrDigit(c)){
+                normalizedString+=c;
+            }
+        }
 
-      //inserting into queue and stack
-      for (char c: input.toCharArray()){
-        list.add(c);
-      }
+        for(int i=0;i<normalizedString.length()-1;i++){
+            if(normalizedString.charAt(i)!=normalizedString.charAt(normalizedString.length()-1-i)){
+                isPalindrome=false;
+                break;
+            }
+        }
 
-      boolean isPalindrome=true;
 
-      while (list.size()>1){
 
-            if(list.removeFirst()!=list.removeLast()){
-              isPalindrome=false;
-              break;
-          }
-      }
-
-      //displaying the result
         System.out.println("input: "+input);
-        System.out.println("is Palindrome? :"+isPalindrome);
-
-
+        System.out.println("is Palindrome :"+isPalindrome);
     }
 }
