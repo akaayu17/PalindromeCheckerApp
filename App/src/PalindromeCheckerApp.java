@@ -14,19 +14,15 @@ import java.util.*;
  *  intialize start and end index of the string
  *  checks the element of starting index and ending index recursively
  *  displays the result
- *
- *
  * @author  Aayusha Kuikel
  * @version 9.0
  */
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
         String input = "level";
-       int start=0;
-       int end=input.length()-1;
-
-
-        System.out.println("input: "+input);
+       int start = 0;
+       int end = input.length()-1;
+     System.out.println("input: "+input);
         System.out.println("is Palindrome? :"+isPalindrome(input,start,end));
 
 
