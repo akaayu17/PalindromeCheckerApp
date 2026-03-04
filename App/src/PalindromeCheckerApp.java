@@ -1,5 +1,3 @@
-
-
 import java.util.*;
 
 /**
@@ -17,7 +15,9 @@ import java.util.*;
  * @author  Aayusha Kuikel
  * @version 9.0
  */
+
 public class PalindromeCheckerApp {
+
     public static void main(String[] args) {
         String input = "level";
        int start = 0;
@@ -25,17 +25,55 @@ public class PalindromeCheckerApp {
      System.out.println("input: "+input);
         System.out.println("is Palindrome? :"+isPalindrome(input,start,end));
 
+        System.out.println("\nResults:");
+        System.out.println("Two Pointer Result: " + result1 + " | Time: " + time1 + " ns");
+        System.out.println("Stack Result: " + result2 + " | Time: " + time2 + " ns");
+        System.out.println("Deque Result: " + result3 + " | Time: " + time3 + " ns");
 
+        sc.close();
     }
-    public static boolean isPalindrome(String s, int start , int end){
-        if (start>=end){
-            return true;
+
+    public static boolean twoPointer(String str) {
+        int left = 0;
+        int right = str.length() - 1;
+
+        while (left < right) {
+            if (str.charAt(left) != str.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
         }
-        if (s.charAt(start) != s.charAt(end)) {
-            return false;
+        return true;
+    }
+
+    public static boolean stackMethod(String str) {
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : str.toCharArray()) {
+            stack.push(c);
         }
 
-        return isPalindrome(s,start+1,end-1);
+        for (char c : str.toCharArray()) {
+            if (c != stack.pop()) {
+                return false;
+            }
+        }
+        return true;
+    }
 
+    public static boolean dequeMethod(String str) {
+        Deque<Character> deque = new ArrayDeque<>();
+
+        for (char c : str.toCharArray()) {
+            deque.addLast(c);
+        }
+
+        while (deque.size() > 1) {
+            if (deque.removeFirst() != deque.removeLast()) {
+                return false;
+            }
+        }
+        return true;
     }
 }
