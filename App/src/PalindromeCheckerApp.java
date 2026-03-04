@@ -1,56 +1,29 @@
 import java.util.*;
 
 /**
- ============================================================
- MAIN CLASS - PalindromeCheckerApp
- ============================================================
-
- Use Case 13: Performance Comparison
-
- Description:
- This application compares the execution time of
- different palindrome validation algorithms.
-
- Algorithms Compared:
- 1. Two Pointer Approach
- 2. Stack Based Approach
- 3. Deque Based Approach
-
- The application:
- - Executes each algorithm
- - Captures execution time using System.nanoTime()
- - Displays performance results
-
- @author Aayusha Kuikel
- @version 13.0
- ============================================================
+ * main class - use case palindrome app
+ *
+ * use case 9:Recursive Palindrome checker
+ *
+ * Description:
+ * this class validates the palindrome using Call Stack
+ *
+ *  the application:
+ *  intialize start and end index of the string
+ *  checks the element of starting index and ending index recursively
+ *  displays the result
+ * @author  Aayusha Kuikel
+ * @version 9.0
  */
 
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
-
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter a string: ");
-        String input = sc.nextLine();
-
-        // Normalize input
-        String cleaned = input.replaceAll("\\W", "").toLowerCase();
-
-        long start1 = System.nanoTime();
-        boolean result1 = twoPointer(cleaned);
-        long end1 = System.nanoTime();
-        long time1 = end1 - start1;
-
-        long start2 = System.nanoTime();
-        boolean result2 = stackMethod(cleaned);
-        long end2 = System.nanoTime();
-        long time2 = end2 - start2;
-
-        long start3 = System.nanoTime();
-        boolean result3 = dequeMethod(cleaned);
-        long end3 = System.nanoTime();
-        long time3 = end3 - start3;
+        String input = "level";
+       int start = 0;
+       int end = input.length()-1;
+     System.out.println("input: "+input);
+        System.out.println("is Palindrome? :"+isPalindrome(input,start,end));
 
         System.out.println("\nResults:");
         System.out.println("Two Pointer Result: " + result1 + " | Time: " + time1 + " ns");
